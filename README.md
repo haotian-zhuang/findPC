@@ -6,7 +6,5 @@ findPC is a software tool including multiple metrics to automatically determine 
 findPC software can be installed via Github. Users should have R installed on their computer before installing findPC. R can be downloaded here: http://www.r-project.org/. To install the latest version of findPC package via Github, run following commands in R:
 
 `if (!require("devtools"))
-
 install.packages("devtools")
-
 devtools::install_github("haotian-zhuang/findPC")`
