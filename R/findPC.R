@@ -5,6 +5,7 @@ findPC<-function(sdev,method="All",figure=FALSE,aggregate=NULL){
   }
 
   require(ggplot2)
+  require(cowplot)
 
   x<-1:length(sdev)
   eb<-data.frame(x,sdev)
@@ -71,27 +72,37 @@ findPC<-function(sdev,method="All",figure=FALSE,aggregate=NULL){
   if(method=="All"){
     ##### Plot function
     if(figure==TRUE){
-     g<-ggplot(eb,aes(x=x,y=sdev))+geom_point()+theme_bw()+
-        xlab("Principal Component")+ylab("Standard Deviation")+
+
+      g1<-ggplot(eb,aes(x=x,y=sdev))+geom_point()+theme_bw()+
+        xlab(NULL)+
+        ylab("Standard Deviation")+
         ggtitle("Determine Optimal Number of PCs to Retain Under Multiple Metrics")+
         geom_line(aes(x=x,y=sdev))+
-        geom_vline(xintercept=dim_pie,lty=2,col="red")+
-        geom_label(aes(x=dim_pie+1,y=6,label="Piecewise Linear Model"),size=5,col="red")+
+        scale_x_continuous(limits = c(1,length(sdev)),labels = NULL)+
+        theme(panel.grid =element_blank())+
+        theme(axis.ticks.x = element_blank())+
+        theme(panel.border = element_blank())+
+        theme(axis.line= element_line())+
+        theme(plot.title = element_text(hjust = 0.5))
 
-        geom_vline(xintercept=dim_sed+0.1,lty=2,col="tan")+
-        geom_label(aes(x=dim_sed+1,y=5,label="Second Derivative (LOESS)"),size=5,col="tan")+
 
-        geom_vline(xintercept=dim_pr-0.1,lty=2,col="blue")+
-        geom_label(aes(x=dim_pr+1,y=4,label="Preceding Residual"),size=5,col="blue")+
+      plotline<-data.frame(dim_all,1:6)
+      colnames(plotline)=c("Number","Method")
+      g2<-ggplot(plotline,aes(x=Number,y=Method,col=as.factor(Method)))+geom_point(size=2)+theme_bw()+
+        xlab("Number of PC")+ylab("Method")+
+        scale_x_continuous(breaks = 1:length(sdev),limits = c(1,length(sdev)))+
+        scale_y_continuous(limits = c(0,7),labels = NULL)+
+        scale_color_discrete(name = "Method",
+                             labels = c("Piecewise Linear Model", "Second Derivative (LOESS)", "Preceding Residual",
+                                        "Point-Diagonal Distance", "K-means Clustering","Information Dimension"))+
+        theme(legend.position = "bottom")+
+        theme(legend.title = element_blank())+
+        theme(panel.grid =element_blank())+
+        theme(axis.ticks.y = element_blank())+
+        theme(panel.border = element_blank())+
+        theme(axis.line.x = element_line())
 
-        geom_vline(xintercept=dim_dst+0.2,lty=2,col="purple")+
-        geom_label(aes(x=dim_dst+1,y=3,label="Point-Diagonal Distance"),size=5,col="purple")+
-
-        geom_vline(xintercept=dim_clu-0.2,lty=2,col="green")+
-        geom_label(aes(x=dim_clu+1,y=2,label="K-means Clustering"),size=5,col="green")+
-
-        geom_vline(xintercept=dim_entr,lty=2,col="pink")+
-        geom_label(aes(x=dim_entr-1,y=3.5,label="Information Dimension"),size=5,col="pink")
+     g<-plot_grid(g1,g2,nrow = 2,align = "v",rel_heights = c(2,1))
      print(g)
     }
     #####
@@ -117,17 +128,64 @@ findPC<-function(sdev,method="All",figure=FALSE,aggregate=NULL){
 
 
   else if(method=="Piecewise Linear Model"){
+    if(figure==TRUE){
+      p1<-ggplot(eb,aes(x=x,y=sdev))+geom_point()+theme_bw()+
+        xlab("Number of PC")+ylab("Standard Deviation")+
+        geom_line(aes(x=x,y=predict(lm(sdev~x+pmax(0,x-dim_pie)))),col="red")+
+        geom_vline(xintercept=dim_pie,lty=2,col="blue")+
+        theme(panel.grid =element_blank())+
+        theme(panel.border = element_blank())+
+        theme(axis.line= element_line())
+      print(p1)
+    }
     return(dim_pie)
+
   } else if(method=="Second Derivative (LOESS)"){
+    if(figure==TRUE){
+      p2<-ggplot(eb,aes(x=x,y=sdev))+geom_point()+theme_bw()+
+        xlab("Number of PC")+ylab("Standard Deviation")+
+        geom_line(aes(x=x,y=predict(loess(sdev~x,eb))),col="red")+
+        geom_vline(xintercept=dim_sed,lty=2,col="blue")+
+        theme(panel.grid =element_blank())+
+        theme(panel.border = element_blank())+
+        theme(axis.line= element_line())
+      print(p2)
+    }
     return(dim_sed)
+
   } else if(method=="Preceding Residual"){
+    if(figure==TRUE){
+      p3<-ggplot(eb,aes(x=x,y=sdev))+geom_point()+theme_bw()+
+        xlab("Number of PC")+ylab("Standard Deviation")+
+        geom_line(aes(x=x[dim_pr:length(sdev)],y=predict(fit[[dim_pr]],newdata=data.frame(x=dim_pr:length(sdev)))),
+                  data=data.frame(x[dim_pr:length(sdev)],predict(fit[[dim_pr]],newdata=data.frame(x=dim_pr:length(sdev)))),col="red")+
+        geom_vline(xintercept=dim_pr,lty=2,col="blue")+
+        theme(panel.grid =element_blank())+
+        theme(panel.border = element_blank())+
+        theme(axis.line= element_line())
+      print(p3)
+    }
     return(dim_pr)
+
   } else if(method=="Point-Diagonal Distance"){
+    if(figure==TRUE){
+      p4<-ggplot(eb,aes(x=x,y=sdev))+geom_point()+theme_bw()+
+        xlab("Number of PC")+ylab("Standard Deviation")+
+        geom_line(aes(x=x,y=sdev),data=eb[c(1,length(sdev)),],col="red")+
+        geom_vline(xintercept=dim_dst,lty=2,col="blue")+
+        theme(panel.grid =element_blank())+
+        theme(panel.border = element_blank())+
+        theme(axis.line= element_line())
+      print(p4)
+    }
     return(dim_dst)
+
   } else if(method=="K-means Clustering"){
     return(dim_clu)
+
   } else if(method=="Information Dimension"){
     return(dim_entr)
+
   } else {
     stop("'method' includes 'All (default)','Piecewise Linear Model','Second Derivative (LOESS)',
          'Preceding Residual','Point-Diagonal Distance','K-means Clustering','Information Dimension' options")
