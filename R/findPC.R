@@ -6,6 +6,7 @@ findPC<-function(sdev,method="All",figure=FALSE,aggregate=NULL){
 
   require(ggplot2)
   require(cowplot)
+  require(RColorBrewer)
 
   x<-1:length(sdev)
   eb<-data.frame(x,sdev)
@@ -33,7 +34,7 @@ findPC<-function(sdev,method="All",figure=FALSE,aggregate=NULL){
   # Preceding Residual
   fit<-NULL;slope<-NULL;res<-NULL
   for (i in 1:(length(sdev)-2)) {
-    fit[[i]]<-lm(sdev~x,data=eb[c(i+1,length(sdev)),])
+    fit[[i]]<-lm(sdev~x,data=eb[(i+1):length(sdev),])
     res[i]<-sdev[i]-predict(fit[[i]],newdata=data.frame(x=i))
   }
   den<-density(res)
@@ -90,11 +91,12 @@ findPC<-function(sdev,method="All",figure=FALSE,aggregate=NULL){
       colnames(plotline)=c("Number","Method")
       g2<-ggplot(plotline,aes(x=Number,y=Method,col=as.factor(Method)))+geom_point(size=2)+theme_bw()+
         xlab("Number of PC")+ylab("Method")+
-        scale_x_continuous(breaks = 1:length(sdev),limits = c(1,length(sdev)))+
+        scale_x_continuous(breaks = seq(5,length(sdev),by=5),limits = c(1,length(sdev)))+
+        #scale_x_continuous(breaks = 1:length(sdev),limits = c(1,length(sdev)))+
         scale_y_continuous(limits = c(0,7),labels = NULL)+
-        scale_color_discrete(name = "Method",
-                             labels = c("Piecewise Linear Model", "Second Derivative (LOESS)", "Preceding Residual",
-                                        "Point-Diagonal Distance", "K-means Clustering","Information Dimension"))+
+        scale_colour_brewer(palette = "Set1",name = "Method",
+                            labels = c("Piecewise Linear Model", "Second Derivative (LOESS)", "Preceding Residual",
+                                       "Point-Diagonal Distance", "K-means Clustering","Information Dimension"))+
         theme(legend.position = "bottom")+
         theme(legend.title = element_blank())+
         theme(panel.grid =element_blank())+
