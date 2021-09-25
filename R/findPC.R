@@ -96,7 +96,7 @@ findPC<-function(sdev,method='perpendicular line',aggregate=NULL,figure=FALSE){
 
       plotline<-data.frame(dim_all,1:6)
       colnames(plotline)=c("Number","Method")
-      g2<-ggplot(plotline,aes(x=Number,y=Method,col=as.factor(Method)))+geom_point(size=2)+theme_bw()+
+      g2<-ggplot(plotline,aes(x=Number,y=Method,col=as.factor(Method)))+geom_point(size=1.5)+theme_bw()+
         xlab("Number of PC")+ylab("Method")+
         scale_x_continuous(breaks = seq(5,length(sdev),by=5),limits = c(1,length(sdev)))+
         #scale_x_continuous(breaks = 1:length(sdev),limits = c(1,length(sdev)))+
