@@ -84,7 +84,7 @@ findPC<-function(sdev,method='perpendicular line',aggregate=NULL,figure=FALSE){
       g1<-ggplot(eb,aes(x=x,y=sdev))+geom_point()+theme_bw()+
         xlab(NULL)+
         ylab("Standard deviation")+
-        ggtitle("Determine the optimal number of PCs to retain under multiple metrics")+
+        ggtitle(NULL)+
         geom_line(aes(x=x,y=sdev))+
         scale_x_continuous(limits = c(1,length(sdev)),labels = NULL)+
         theme(panel.grid =element_blank())+
