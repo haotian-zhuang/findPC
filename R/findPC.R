@@ -5,8 +5,7 @@ findPC<-function(sdev,method='perpendicular line',aggregate=NULL,figure=FALSE){
   }
 
   require(ggplot2)
-  require(cowplot) # Arrange multiple plots into a grid
-  require(RColorBrewer)
+  require(cowplot) # arrange multiple plots into a grid
 
   x<-1:length(sdev)
   eb<-data.frame(x,sdev)
@@ -112,7 +111,7 @@ findPC<-function(sdev,method='perpendicular line',aggregate=NULL,figure=FALSE){
         theme(panel.border = element_blank())+
         theme(axis.line.x = element_line())
 
-     g<-plot_grid(g1,g2,nrow = 2,align = "v",rel_heights = c(2,1))
+     g<-plot_grid(g1,g2,nrow = 2,align = "v",rel_heights = c(1.5,1))
      print(g)
     }
     #####
@@ -139,58 +138,74 @@ findPC<-function(sdev,method='perpendicular line',aggregate=NULL,figure=FALSE){
 
   else if(method=="piecewise linear model"){
     if(figure==TRUE){
-      p1<-ggplot(eb,aes(x=x,y=sdev))+geom_point()+theme_bw()+
-        xlab("Number of PC")+ylab("Standard Deviation")+
-        geom_line(aes(x=x,y=predict(lm(sdev~x+pmax(0,x-dim_plm)))),col="red")+
-        geom_vline(xintercept=dim_plm,lty=2,col="blue")+
-        geom_label(aes(x=dim_plm,y=min(sdev),label="piecewise linear model"),size=3,col=brewer.pal(6,"Set2")[1])+
+      eb$title1<-"Piecewise linear model"
+      p1<-ggplot(eb,aes(x=x,y=sdev))+geom_point(col="orange")+theme_bw()+
+        xlab("Number of PC")+ylab("Standard deviation")+
+        geom_line(aes(x=x,y=predict(lm(sdev~x+pmax(0,x-dim_plm)))),col="skyblue",size=1)+
+        geom_vline(xintercept=dim_plm,lty=2,col="royalblue",size=1)+
         theme(panel.grid =element_blank())+
         theme(panel.border = element_blank())+
-        theme(axis.line= element_line())
+        theme(axis.line= element_line())+
+        theme(plot.title = element_text(hjust = 0.5))+
+        facet_grid(. ~ title1)+
+        theme(strip.background = element_rect(fill="grey"),
+              strip.text = element_text(size = 13))
       print(p1)
     }
     return(dim_plm)
 
   } else if(method=="first derivative"){
     if(figure==TRUE){
-      p2<-ggplot(eb,aes(x=x,y=sdev))+geom_point()+theme_bw()+
-        xlab("Number of PC")+ylab("Standard Deviation")+
-        geom_line(aes(x=x,y=sdev),data=eb[1:dim_fid,],col="red")+
-        geom_vline(xintercept=dim_fid,lty=2,col="blue")+
-        geom_label(aes(x=dim_fid,y=min(sdev),label="first derivative"),size=3,col=brewer.pal(6,"Set2")[2])+
+      eb$title2<-"First derivative"
+      p2<-ggplot(eb,aes(x=x,y=sdev))+geom_point(col="orange")+theme_bw()+
+        xlab("Number of PC")+ylab("Standard deviation")+
+        geom_line(aes(x=x,y=sdev),data=eb[1:dim_fid,],col="skyblue",size=1)+
+        geom_vline(xintercept=dim_fid,lty=2,col="royalblue",size=1)+
         theme(panel.grid =element_blank())+
         theme(panel.border = element_blank())+
-        theme(axis.line= element_line())
+        theme(axis.line= element_line())+
+        theme(plot.title = element_text(hjust = 0.5))+
+        facet_grid(. ~ title2)+
+        theme(strip.background = element_rect(fill="grey"),
+              strip.text = element_text(size = 13))
       print(p2)
     }
     return(dim_fid)
 
   } else if(method=="second derivative"){
     if(figure==TRUE){
-      p3<-ggplot(eb,aes(x=x,y=sdev))+geom_point()+theme_bw()+
-        xlab("Number of PC")+ylab("Standard Deviation")+
-        geom_line(aes(x=x,y=sdev),data=eb[c(dim_sed-1,dim_sed),],col="red")+
-        geom_line(aes(x=x,y=sdev),data=eb[c(dim_sed,dim_sed+1),],col="red")+
-        geom_vline(xintercept=dim_sed,lty=2,col="blue")+
-        geom_label(aes(x=dim_sed,y=min(sdev),label="second derivative"),size=3,col=brewer.pal(6,"Set2")[3])+
+      eb$title3<-"Second derivative"
+      p3<-ggplot(eb,aes(x=x,y=sdev))+geom_point(col="orange")+theme_bw()+
+        xlab("Number of PC")+ylab("Standard deviation")+
+        geom_line(aes(x=x,y=sdev),data=eb[c(dim_sed-1,dim_sed),],col="skyblue",size=1)+
+        geom_line(aes(x=x,y=sdev),data=eb[c(dim_sed,dim_sed+1),],col="skyblue",size=1)+
+        geom_vline(xintercept=dim_sed,lty=2,col="royalblue",size=1)+
         theme(panel.grid =element_blank())+
         theme(panel.border = element_blank())+
-        theme(axis.line= element_line())
+        theme(axis.line= element_line())+
+        theme(plot.title = element_text(hjust = 0.5))+
+        facet_grid(. ~ title3)+
+        theme(strip.background = element_rect(fill="grey"),
+              strip.text = element_text(size = 13))
       print(p3)
     }
     return(dim_sed)
 
   } else if(method=="preceding residual"){
     if(figure==TRUE){
-      p4<-ggplot(eb,aes(x=x,y=sdev))+geom_point()+theme_bw()+
-        xlab("Number of PC")+ylab("Standard Deviation")+
+      eb$title4<-"Preceding residual"
+      p4<-ggplot(eb,aes(x=x,y=sdev))+geom_point(col="orange")+theme_bw()+
+        xlab("Number of PC")+ylab("Standard deviation")+
         geom_line(aes(x=x[dim_pr:length(sdev)],y=predict(fit[[dim_pr]],newdata=data.frame(x=dim_pr:length(sdev)))),
-                  data=data.frame(x[dim_pr:length(sdev)],predict(fit[[dim_pr]],newdata=data.frame(x=dim_pr:length(sdev)))),col="red")+
-        geom_vline(xintercept=dim_pr,lty=2,col="blue")+
-        geom_label(aes(x=dim_pr,y=min(sdev),label="preceding residual"),size=3,col=brewer.pal(6,"Set2")[4])+
+                  data=data.frame(x[dim_pr:length(sdev)],predict(fit[[dim_pr]],newdata=data.frame(x=dim_pr:length(sdev)))),col="skyblue",size=1)+
+        geom_vline(xintercept=dim_pr,lty=2,col="royalblue",size=1)+
         theme(panel.grid =element_blank())+
         theme(panel.border = element_blank())+
-        theme(axis.line= element_line())
+        theme(axis.line= element_line())+
+        theme(plot.title = element_text(hjust = 0.5))+
+        facet_grid(. ~ title4)+
+        theme(strip.background = element_rect(fill="grey"),
+              strip.text = element_text(size = 13))
       print(p4)
     }
     return(dim_pr)
@@ -204,39 +219,45 @@ findPC<-function(sdev,method='perpendicular line',aggregate=NULL,figure=FALSE){
       #           1*sdev[length(sdev)]-sdev[1]*length(sdev))
       #po<-solve(lf,rf)
 
-      p5<-ggplot(eb,aes(x=x,y=sdev))+geom_point()+theme_bw()+
-        xlab("Number of PC")+ylab("Standard Deviation")+
-        geom_line(aes(x=x,y=sdev),data=eb[c(1,length(sdev)),],col="red")+
-       #geom_segment(x=dim_perl,y=sdev[dim_perl],xend=po[1],yend=po[2],linetype=2)+
-        geom_vline(xintercept=dim_perl,lty=2,col="blue")+
-        geom_label(aes(x=dim_perl,y=min(sdev),label="perpendicular line"),size=3,col=brewer.pal(6,"Set2")[5])+
+      eb$title5<-"Perpendicular line"
+      p5<-ggplot(eb,aes(x=x,y=sdev))+geom_point(col="orange")+theme_bw()+
+        xlab("Number of PC")+ylab("Standard deviation")+
+        geom_line(aes(x=x,y=sdev),data=eb[c(1,length(sdev)),],col="skyblue",size=1)+
+        geom_vline(xintercept=dim_perl,lty=2,col="royalblue",size=1)+
         theme(panel.grid =element_blank())+
         theme(panel.border = element_blank())+
-        theme(axis.line= element_line())
+        theme(axis.line= element_line())+
+        theme(plot.title = element_text(hjust = 0.5))+
+        facet_grid(. ~ title5)+
+        theme(strip.background = element_rect(fill="grey"),
+              strip.text = element_text(size = 13))
       print(p5)
     }
     return(dim_perl)
 
   } else if(method=="k-means clustering"){
     if(figure==TRUE){
+      eb$title6<-"K-means clustering"
       p6<-ggplot(eb,aes(x=x,y=sdev))+
-        geom_point(aes(x=x,y=sdev),eb[1:dim_clu-1,],col="purple")+
-        geom_point(aes(x=x,y=sdev),eb[dim_clu:length(sdev),],col="green")+
+        geom_point(aes(x=x,y=sdev),eb[1:dim_clu-1,],col="orange")+
+        geom_point(aes(x=x,y=sdev),eb[dim_clu:length(sdev),],col="orange")+
         theme_bw()+
-        xlab("Number of PC")+ylab("Standard Deviation")+
-        geom_vline(xintercept=dim_clu,lty=2,col="blue")+
-        geom_label(aes(x=dim_clu,y=min(sdev),label="k-means clustering"),size=3,col=brewer.pal(6,"Set2")[6])+
+        xlab("Number of PC")+ylab("Standard deviation")+
+        geom_vline(xintercept=dim_clu,lty=2,col="royalblue",size=1)+
         theme(panel.grid =element_blank())+
         theme(panel.border = element_blank())+
-        theme(axis.line= element_line())
+        theme(axis.line= element_line())+
+        theme(plot.title = element_text(hjust = 0.5))+
+        facet_grid(. ~ title6)+
+        theme(strip.background = element_rect(fill="grey"),
+              strip.text = element_text(size = 13))
         print(p6)
     }
     return(dim_clu)
 
   } else {
-    stop("'method' includes 'all (default)','piecewise linear model','first derivative',
-     'second derivative','preceding residual','perpendicular line','k-means clustering' options")
+    stop("'method' includes 'all','piecewise linear model','first derivative',
+     'second derivative','preceding residual','perpendicular line (default)','k-means clustering' options")
   }
 
 }
-
