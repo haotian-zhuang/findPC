@@ -111,7 +111,7 @@ findPC<-function(sdev,method='perpendicular line',aggregate=NULL,figure=FALSE){
         theme(panel.border = element_blank())+
         theme(axis.line.x = element_line())
 
-     g<-plot_grid(g1,g2,nrow = 2,align = "v",rel_heights = c(1.5,1))
+     g<-plot_grid(g1,g2,nrow = 2,align = "v",rel_heights = c(1,1))
      print(g)
     }
     #####
@@ -256,8 +256,9 @@ findPC<-function(sdev,method='perpendicular line',aggregate=NULL,figure=FALSE){
     return(dim_clu)
 
   } else {
-    stop("'method' includes 'all','piecewise linear model','first derivative',
-     'second derivative','preceding residual','perpendicular line (default)','k-means clustering' options")
+    stop("'method' includes 'all','piecewise linear model',
+    'first derivative','second derivative','preceding residual',
+    'perpendicular line (default)','k-means clustering' options")
   }
 
 }
