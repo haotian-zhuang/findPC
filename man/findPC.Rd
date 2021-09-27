@@ -11,7 +11,7 @@ findPC(sdev,method = 'perpendicular line',aggregate = NULL,figure = FALSE)
 
 \arguments{
 \item{sdev}{The standard deviations explained by each principal components.}
-\item{method}{Methods include `'all','piecewise linear model', 'first derivative', 'second derivative', 'preceding residual', 'perpendicular line (default)', 'k-means clustering'`}
+\item{method}{Methods include 'all','piecewise linear model', 'first derivative', 'second derivative', 'preceding residual', 'perpendicular line (default)', 'k-means clustering'}
 \item{aggregate}{An option to report the mean, median, or voting (median if all are different, otherwise mode) of the results from six methods}
 \item{figure}{Whether to generate informative figures based on each method}
 }
