@@ -5,8 +5,8 @@ Version: 1.0.0
 Author: Haotian Zhuang, Zhicheng Ji
 Maintainer: Haotian Zhuang <haotian.zhuang@duke.edu>
 Description: findPC is a software tool including multiple metrics to automatically determine 
-the optimal number of principal components to retain based on the standard deviations explained by each PC. 
-A major advantage of findPC is that the only information required is a series of standard deviations explained by each PC.
+    the optimal number of principal components to retain based on the standard deviations explained by each PC. 
+    A major advantage of findPC is that the only information required is a series of standard deviations explained by each PC.
 License: 
 Imports: ggplot2, cowplot
 Encoding: UTF-8
