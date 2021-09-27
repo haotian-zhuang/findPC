@@ -2,10 +2,14 @@ Package: findPC
 Type: Package
 Title: Determine the Optimal Number of PCs to Retain
 Version: 0.1.0
-Author: Haotian Zhuang, Zhicheng Ji
+Authors: c(
+        person("Haotian", "Zhuang", role=c("aut", "cre"), email="haotian.zhuang@duke.edu"),
+        person("Zhicheng", "Ji", role=c("aut")))
 Maintainer: Haotian Zhuang <haotian.zhuang@duke.edu>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Description: findPC is a software tool including multiple metrics to automatically determine 
+the optimal number of principal components to retain based on the standard deviations explained by each PC. 
+A major advantage of findPC is that the only information required is a series of standard deviations explained by each PC.
+License: 
+Imports: ggplot2, cowplot
 Encoding: UTF-8
 LazyData: true
