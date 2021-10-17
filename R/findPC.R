@@ -196,8 +196,8 @@ findPC<-function(sdev,method='perpendicular line',aggregate=NULL,figure=FALSE){
       eb$title4<-"Preceding residual"
       p4<-ggplot(eb,aes(x=x,y=sdev))+geom_point(col="orange")+theme_bw()+
         xlab("Number of PC")+ylab("Standard deviation")+
-        geom_line(aes(x=x[dim_pr:length(sdev)],y=predict(fit[[dim_pr]],newdata=data.frame(x=dim_pr:length(sdev)))),
-                  data=data.frame(x[dim_pr:length(sdev)],predict(fit[[dim_pr]],newdata=data.frame(x=dim_pr:length(sdev)))),col="skyblue",size=1)+
+        geom_line(aes(x=x[(dim_pr-1):length(sdev)],y=predict(fit[[(dim_pr-1)]],newdata=data.frame(x=(dim_pr-1):length(sdev)))),
+                  data=data.frame(x[(dim_pr-1):length(sdev)],predict(fit[[(dim_pr-1)]],newdata=data.frame(x=(dim_pr-1):length(sdev)))),col="skyblue",size=1)+
         geom_vline(xintercept=dim_pr,lty=2,col="royalblue",size=1)+
         theme(panel.grid =element_blank())+
         theme(panel.border = element_blank())+

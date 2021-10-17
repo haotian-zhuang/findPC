@@ -2,7 +2,7 @@
 \alias{findPC}
 \title{findPC}
 \description{
-findPC is a function including multiple metrics to automatically determine the optimal number of principal components to retain based on the standard deviations explained by each PC.
+findPC is a function including six methods to automatically determine the optimal number of principal components to retain based on the standard deviations explained by each PC.
 }
 
 \usage{
