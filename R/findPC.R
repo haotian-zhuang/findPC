@@ -113,7 +113,7 @@ findPC<-function(sdev,number=20,method='perpendicular line',aggregate=NULL,figur
   }
 
   if(max(number)>length(sdev)) {
-    stop("maximum 'number' exceeds the available number of PCs")
+    stop("'number' exceeds the available number of PCs")
   }
 
   l=length(number)
@@ -172,7 +172,7 @@ names(dim_mode)<-"mode"
       return(dim_median)
     } else if(aggregate=="voting"){
     # If all the results are different, voting is median, otherwise voting is mode
-    if(length(unique(result))==length(result)){
+    if(length(unique(as.vector(result)))==length(result)){
       return(dim_median)
     } else{
       return(dim_mode)
