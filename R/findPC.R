@@ -157,9 +157,9 @@ findPC<-function(sdev,number=20,method='perpendicular line',aggregate=NULL,figur
     'first derivative','second derivative','preceding residual',
     'perpendicular line (default)','k-means clustering' options")}
 
-dim_mean<-floor(mean(result))
+dim_mean<-round(mean(result))
 names(dim_mean)<-"mean"
-dim_median<-floor(median(result))
+dim_median<-round(median(result))
 names(dim_median)<-"median"
 dim_mode<-as.numeric(names(which.max(table(result))))
 names(dim_mode)<-"mode"
