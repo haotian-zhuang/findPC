@@ -69,9 +69,10 @@ fun<-function(sdev){
 fig<-function(sdev,result){
 
 require(ggplot2)
-require(RColorBrewer)
+require(reshape2)
 require(grid)
 require(gridExtra)
+
 x<-1:length(sdev)
 eb<-data.frame(x,sdev)
 
@@ -86,7 +87,7 @@ g1<-ggplot(eb,aes(x=x,y=sdev))+geom_point(size=1,col="orange")+theme_bw()+
   theme(title = element_text(size = rel(1)))
 
 npc<-result
-NPC<-reshape2::melt(npc)
+NPC<-melt(npc)
 
 g2<-ggplot(NPC,aes(Var1,Var2,fill=value))+geom_tile()+geom_text(aes(label=value))+
   scale_fill_gradient(low = '#FFCCCC',high = '#FF3333',breaks=range(NPC$value),guide = "legend")+

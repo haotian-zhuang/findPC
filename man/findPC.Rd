@@ -6,7 +6,7 @@ findPC is a function including six methods to automatically determine the optima
 }
 
 \usage{
-findPC(sdev,method = 'perpendicular line',aggregate = NULL,figure = FALSE)
+findPC(sdev,number = 20,method = 'perpendicular line',aggregate = NULL,figure = FALSE)
 }
 
 \arguments{
