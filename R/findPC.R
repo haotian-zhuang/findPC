@@ -68,11 +68,6 @@ fun<-function(sdev){
 
 fig<-function(sdev,result){
 
-require(ggplot2)
-require(reshape2)
-require(grid)
-require(gridExtra)
-
 x<-1:length(sdev)
 eb<-data.frame(x,sdev)
 
