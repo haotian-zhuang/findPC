@@ -12,7 +12,7 @@
 #' @param aggregate An option to report the mean, median, or voting (median if all are different, otherwise mode) of the results
 #' @param figure Whether to draw a heatmap showing the results
 #'
-#' @return A numeric value (matrix) including the number of PCs. A ggplot2 object
+#' @return A numeric value (matrix) including the number of PCs.
 #' @export
 #' @import ggplot2 grid gridExtra reshape2
 #' @author Haotian Zhuang, Zhicheng Ji <haotian.zhuang@@duke.edu>

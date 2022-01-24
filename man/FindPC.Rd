@@ -24,7 +24,7 @@ FindPC(
 \item{figure}{Whether to draw a heatmap showing the results}
 }
 \value{
-A numeric value (matrix) including the number of PCs. A ggplot2 object
+A numeric value (matrix) including the number of PCs.
 }
 \description{
 Automatically select the number of principal components in single-cell analysis
