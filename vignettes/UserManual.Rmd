@@ -1,5 +1,5 @@
 ---
-title: "FindPC: An R package to automatically select number of principal components in single-cell analysis"
+title: "FindPC - User Manual"
 author: "Haotian Zhuang"
 output: rmarkdown::html_vignette
 vignette: >
@@ -20,7 +20,7 @@ FindPC is a software tool including six methods to automatically select the numb
 
 # Installation
 FindPC software can be installed via Github. Users should have R installed on their computer before installing FindPC. R can be downloaded here: http://www.r-project.org/. To install the latest version of FindPC package via Github, run following commands in R:
-```{r}
+```{r message=FALSE,warning=FALSE}
 if (!require("devtools"))
 install.packages("devtools")
 devtools::install_github("haotian-zhuang/FindPC")
@@ -114,3 +114,10 @@ The last argument ‘figure’ provides the option to draw a heatmap showing the
 ```{r, fig.width=8, fig.height=4}
 FindPC(sdev = sdev,number = c(16,20,28),method = 'all',figure = T)
 ```
+
+<details>
+  <summary>**Session Info**</summary>
+```{r}
+sessionInfo()
+```
+</details>

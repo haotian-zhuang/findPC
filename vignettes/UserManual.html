@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="author" content="Haotian Zhuang" />
+
+
+<title>FindPC - User Manual</title>
+
+<script>// Hide empty <a> tag within highlighted CodeBlock for screen reader accessibility (see https://github.com/jgm/pandoc/issues/6352#issuecomment-626106786) -->
+// v0.0.1
+// Written by JooYoung Seo (jooyoung@psu.edu) and Atsushi Yasumoto on June 1st, 2020.
+
+document.addEventListener('DOMContentLoaded', function() {
+  const codeList = document.getElementsByClassName("sourceCode");
+  for (var i = 0; i < codeList.length; i++) {
+    var linkList = codeList[i].getElementsByTagName('a');
+    for (var j = 0; j < linkList.length; j++) {
+      if (linkList[j].innerHTML === "") {
+        linkList[j].setAttribute('aria-hidden', 'true');
+      }
+    }
+  }
+});
+</script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
+<style type="text/css" data-origin="pandoc">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">FindPC - User Manual</h1>
+<h4 class="author">Haotian Zhuang</h4>
+
+
+
+<div id="introduction" class="section level1">
+<h1>Introduction</h1>
+<p>FindPC is a software tool including six methods to automatically select the number of principal components to retain based on the standard deviations explained by each PC. A major advantage of FindPC is that the only information required is a numeric vector of standard deviations explained by each PC.</p>
+</div>
+<div id="installation" class="section level1">
+<h1>Installation</h1>
+<p>FindPC software can be installed via Github. Users should have R installed on their computer before installing FindPC. R can be downloaded here: <a href="http://www.r-project.org/" class="uri">http://www.r-project.org/</a>. To install the latest version of FindPC package via Github, run following commands in R:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(<span class="st">&quot;devtools&quot;</span>))</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">install.packages</span>(<span class="st">&quot;devtools&quot;</span>)</span>
+<span id="cb1-3"><a href="#cb1-3"></a>devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;haotian-zhuang/FindPC&quot;</span>)</span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="kw">library</span>(FindPC)</span></code></pre></div>
+</div>
+<div id="findpc-function" class="section level1">
+<h1>FindPC function</h1>
+<p>The synopsis of FindPC is:<br />
+<code>FindPC(sdev,number = 30,method = &#39;perpendicular line&#39;,aggregate = NULL,figure = FALSE)</code></p>
+<p>The default is to return the number of PCs by Perpendicular line with 30 PCs. The following codes take the 50 PCs of human fetal brain tissue as an example.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>sdev&lt;-<span class="kw">c</span>(<span class="fl">6.909905</span>,<span class="fl">5.891180</span>,<span class="fl">5.110216</span>,<span class="fl">3.996021</span>,<span class="fl">3.541697</span>,</span>
+<span id="cb2-2"><a href="#cb2-2"></a>        <span class="fl">2.708781</span>,<span class="fl">2.636483</span>,<span class="fl">2.476862</span>,<span class="fl">2.420636</span>,<span class="fl">2.345929</span>,</span>
+<span id="cb2-3"><a href="#cb2-3"></a>        <span class="fl">2.285914</span>,<span class="fl">2.197029</span>,<span class="fl">2.157942</span>,<span class="fl">2.067661</span>,<span class="fl">1.977431</span>,</span>
+<span id="cb2-4"><a href="#cb2-4"></a>        <span class="fl">1.905260</span>,<span class="fl">1.882831</span>,<span class="fl">1.819860</span>,<span class="fl">1.797364</span>,<span class="fl">1.763118</span>,</span>
+<span id="cb2-5"><a href="#cb2-5"></a>        <span class="fl">1.734229</span>,<span class="fl">1.721318</span>,<span class="fl">1.700343</span>,<span class="fl">1.694309</span>,<span class="fl">1.682183</span>,</span>
+<span id="cb2-6"><a href="#cb2-6"></a>        <span class="fl">1.677859</span>,<span class="fl">1.668176</span>,<span class="fl">1.658513</span>,<span class="fl">1.656305</span>,<span class="fl">1.648881</span>,</span>
+<span id="cb2-7"><a href="#cb2-7"></a>        <span class="fl">1.629452</span>,<span class="fl">1.626978</span>,<span class="fl">1.622602</span>,<span class="fl">1.614844</span>,<span class="fl">1.610602</span>,</span>
+<span id="cb2-8"><a href="#cb2-8"></a>        <span class="fl">1.603669</span>,<span class="fl">1.598074</span>,<span class="fl">1.593364</span>,<span class="fl">1.586666</span>,<span class="fl">1.584247</span>,</span>
+<span id="cb2-9"><a href="#cb2-9"></a>        <span class="fl">1.580981</span>,<span class="fl">1.574226</span>,<span class="fl">1.568660</span>,<span class="fl">1.567932</span>,<span class="fl">1.562935</span>,</span>
+<span id="cb2-10"><a href="#cb2-10"></a>        <span class="fl">1.557284</span>,<span class="fl">1.554781</span>,<span class="fl">1.551753</span>,<span class="fl">1.547596</span>,<span class="fl">1.543069</span>)</span>
+<span id="cb2-11"><a href="#cb2-11"></a><span class="kw">FindPC</span>(<span class="dt">sdev =</span> sdev)</span>
+<span id="cb2-12"><a href="#cb2-12"></a><span class="co">#&gt;       Perpendicular line</span></span>
+<span id="cb2-13"><a href="#cb2-13"></a><span class="co">#&gt; 30PCs                  6</span></span></code></pre></div>
+<p>The argument ‘sdev’ should be sorted in decreasing order.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">FindPC</span>(<span class="dt">sdev =</span> <span class="op">-</span>sdev)</span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="co">#&gt; Error in FindPC(sdev = -sdev): &#39;sdev&#39; should be sorted in decreasing order</span></span></code></pre></div>
+<div id="number" class="section level2">
+<h2>Number</h2>
+<p>The argument ‘number’ is a vector including number of PCs used in the following function.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">FindPC</span>(<span class="dt">sdev =</span> sdev,<span class="dt">number =</span> <span class="dv">51</span>)</span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="co">#&gt; Error in FindPC(sdev = sdev, number = 51): &#39;number&#39; exceeds the available number of PCs</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">FindPC</span>(<span class="dt">sdev =</span> sdev,<span class="dt">number =</span> <span class="kw">c</span>(<span class="dv">16</span>,<span class="dv">20</span>,<span class="dv">28</span>))</span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="co">#&gt;       Perpendicular line</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="co">#&gt; 16PCs                  6</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="co">#&gt; 20PCs                  6</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a><span class="co">#&gt; 28PCs                  6</span></span></code></pre></div>
+</div>
+<div id="method" class="section level2">
+<h2>Method</h2>
+<p>The argument ‘method’ specifies the six methods or returns the six results simultaneously.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">FindPC</span>(<span class="dt">sdev =</span> sdev,<span class="dt">method =</span> <span class="st">&#39;xxx&#39;</span>)</span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="co">#&gt; Error in FindPC(sdev = sdev, method = &quot;xxx&quot;): &#39;method&#39; includes &#39;all&#39;,&#39;piecewise linear model&#39;,</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="co">#&gt;     &#39;first derivative&#39;,&#39;second derivative&#39;,&#39;preceding residual&#39;,</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a><span class="co">#&gt;     &#39;perpendicular line (default)&#39;,&#39;k-means clustering&#39; options</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">FindPC</span>(<span class="dt">sdev =</span> sdev,<span class="dt">number =</span> <span class="kw">c</span>(<span class="dv">16</span>,<span class="dv">20</span>,<span class="dv">28</span>),<span class="dt">method =</span> <span class="st">&#39;all&#39;</span>)</span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="co">#&gt;       Piecewise linear model First derivative Second derivative</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="co">#&gt; 16PCs                      6                6                 6</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a><span class="co">#&gt; 20PCs                      6                6                 6</span></span>
+<span id="cb7-5"><a href="#cb7-5"></a><span class="co">#&gt; 28PCs                      6                6                 6</span></span>
+<span id="cb7-6"><a href="#cb7-6"></a><span class="co">#&gt;       Preceding residual Perpendicular line K-means clustering</span></span>
+<span id="cb7-7"><a href="#cb7-7"></a><span class="co">#&gt; 16PCs                  4                  6                  4</span></span>
+<span id="cb7-8"><a href="#cb7-8"></a><span class="co">#&gt; 20PCs                  6                  6                  4</span></span>
+<span id="cb7-9"><a href="#cb7-9"></a><span class="co">#&gt; 28PCs                  6                  6                  5</span></span></code></pre></div>
+<p><strong>Method 1: Piecewise linear model</strong></p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw">FindPC</span>(<span class="dt">sdev =</span> sdev,<span class="dt">number =</span> <span class="kw">c</span>(<span class="dv">16</span>,<span class="dv">20</span>,<span class="dv">28</span>),<span class="dt">method =</span> <span class="st">&#39;piecewise linear model&#39;</span>)</span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="co">#&gt;       Piecewise linear model</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a><span class="co">#&gt; 16PCs                      6</span></span>
+<span id="cb8-4"><a href="#cb8-4"></a><span class="co">#&gt; 20PCs                      6</span></span>
+<span id="cb8-5"><a href="#cb8-5"></a><span class="co">#&gt; 28PCs                      6</span></span></code></pre></div>
+<p><strong>Method 2: First derivative</strong></p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw">FindPC</span>(<span class="dt">sdev =</span> sdev,<span class="dt">number =</span> <span class="kw">c</span>(<span class="dv">16</span>,<span class="dv">20</span>,<span class="dv">28</span>),<span class="dt">method =</span> <span class="st">&#39;first derivative&#39;</span>)</span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="co">#&gt;       First derivative</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a><span class="co">#&gt; 16PCs                6</span></span>
+<span id="cb9-4"><a href="#cb9-4"></a><span class="co">#&gt; 20PCs                6</span></span>
+<span id="cb9-5"><a href="#cb9-5"></a><span class="co">#&gt; 28PCs                6</span></span></code></pre></div>
+<p><strong>Method 3: Second derivative</strong></p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="kw">FindPC</span>(<span class="dt">sdev =</span> sdev,<span class="dt">number =</span> <span class="kw">c</span>(<span class="dv">16</span>,<span class="dv">20</span>,<span class="dv">28</span>),<span class="dt">method =</span> <span class="st">&#39;second derivative&#39;</span>)</span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="co">#&gt;       Second derivative</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a><span class="co">#&gt; 16PCs                 6</span></span>
+<span id="cb10-4"><a href="#cb10-4"></a><span class="co">#&gt; 20PCs                 6</span></span>
+<span id="cb10-5"><a href="#cb10-5"></a><span class="co">#&gt; 28PCs                 6</span></span></code></pre></div>
+<p><strong>Method 4: Preceding residual</strong></p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="kw">FindPC</span>(<span class="dt">sdev =</span> sdev,<span class="dt">number =</span> <span class="kw">c</span>(<span class="dv">16</span>,<span class="dv">20</span>,<span class="dv">28</span>),<span class="dt">method =</span> <span class="st">&#39;preceding residual&#39;</span>)</span>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="co">#&gt;       Preceding residual</span></span>
+<span id="cb11-3"><a href="#cb11-3"></a><span class="co">#&gt; 16PCs                  4</span></span>
+<span id="cb11-4"><a href="#cb11-4"></a><span class="co">#&gt; 20PCs                  6</span></span>
+<span id="cb11-5"><a href="#cb11-5"></a><span class="co">#&gt; 28PCs                  6</span></span></code></pre></div>
+<p><strong>Method 5: Perpendicular line</strong></p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="kw">FindPC</span>(<span class="dt">sdev =</span> sdev,<span class="dt">number =</span> <span class="kw">c</span>(<span class="dv">16</span>,<span class="dv">20</span>,<span class="dv">28</span>),<span class="dt">method =</span> <span class="st">&#39;perpendicular line&#39;</span>)</span>
+<span id="cb12-2"><a href="#cb12-2"></a><span class="co">#&gt;       Perpendicular line</span></span>
+<span id="cb12-3"><a href="#cb12-3"></a><span class="co">#&gt; 16PCs                  6</span></span>
+<span id="cb12-4"><a href="#cb12-4"></a><span class="co">#&gt; 20PCs                  6</span></span>
+<span id="cb12-5"><a href="#cb12-5"></a><span class="co">#&gt; 28PCs                  6</span></span></code></pre></div>
+<p><strong>Method 6: K-means clustering</strong></p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="kw">FindPC</span>(<span class="dt">sdev =</span> sdev,<span class="dt">number =</span> <span class="kw">c</span>(<span class="dv">16</span>,<span class="dv">20</span>,<span class="dv">28</span>),<span class="dt">method =</span> <span class="st">&#39;k-means clustering&#39;</span>)</span>
+<span id="cb13-2"><a href="#cb13-2"></a><span class="co">#&gt;       K-means clustering</span></span>
+<span id="cb13-3"><a href="#cb13-3"></a><span class="co">#&gt; 16PCs                  4</span></span>
+<span id="cb13-4"><a href="#cb13-4"></a><span class="co">#&gt; 20PCs                  4</span></span>
+<span id="cb13-5"><a href="#cb13-5"></a><span class="co">#&gt; 28PCs                  5</span></span></code></pre></div>
+</div>
+<div id="aggregate" class="section level2">
+<h2>Aggregate</h2>
+<p>If users are also interested in the mean, median, or voting (median if all are different, otherwise mode) of the results, the argument ‘aggregate’ will support them.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="kw">FindPC</span>(<span class="dt">sdev =</span> sdev,<span class="dt">number =</span> <span class="kw">c</span>(<span class="dv">16</span>,<span class="dv">20</span>,<span class="dv">28</span>),<span class="dt">method =</span> <span class="st">&#39;all&#39;</span>,<span class="dt">aggregate =</span> <span class="st">&#39;mean&#39;</span>)</span>
+<span id="cb14-2"><a href="#cb14-2"></a><span class="co">#&gt; mean </span></span>
+<span id="cb14-3"><a href="#cb14-3"></a><span class="co">#&gt;    6</span></span>
+<span id="cb14-4"><a href="#cb14-4"></a><span class="kw">FindPC</span>(<span class="dt">sdev =</span> sdev,<span class="dt">number =</span> <span class="kw">c</span>(<span class="dv">16</span>,<span class="dv">20</span>,<span class="dv">28</span>),<span class="dt">method =</span> <span class="st">&#39;all&#39;</span>,<span class="dt">aggregate =</span> <span class="st">&#39;median&#39;</span>)</span>
+<span id="cb14-5"><a href="#cb14-5"></a><span class="co">#&gt; median </span></span>
+<span id="cb14-6"><a href="#cb14-6"></a><span class="co">#&gt;      6</span></span>
+<span id="cb14-7"><a href="#cb14-7"></a><span class="kw">FindPC</span>(<span class="dt">sdev =</span> sdev,<span class="dt">number =</span> <span class="kw">c</span>(<span class="dv">16</span>,<span class="dv">20</span>,<span class="dv">28</span>),<span class="dt">method =</span> <span class="st">&#39;all&#39;</span>,<span class="dt">aggregate =</span> <span class="st">&#39;voting&#39;</span>)</span>
+<span id="cb14-8"><a href="#cb14-8"></a><span class="co">#&gt; mode </span></span>
+<span id="cb14-9"><a href="#cb14-9"></a><span class="co">#&gt;    6</span></span></code></pre></div>
+</div>
+<div id="figure" class="section level2">
+<h2>Figure</h2>
+<p>The last argument ‘figure’ provides the option to draw a heatmap showing the results.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="kw">FindPC</span>(<span class="dt">sdev =</span> sdev,<span class="dt">number =</span> <span class="kw">c</span>(<span class="dv">16</span>,<span class="dv">20</span>,<span class="dv">28</span>),<span class="dt">method =</span> <span class="st">&#39;all&#39;</span>,<span class="dt">figure =</span> T)</span></code></pre></div>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
+<pre><code>#&gt;       Piecewise linear model First derivative Second derivative
+#&gt; 16PCs                      6                6                 6
+#&gt; 20PCs                      6                6                 6
+#&gt; 28PCs                      6                6                 6
+#&gt;       Preceding residual Perpendicular line K-means clustering
+#&gt; 16PCs                  4                  6                  4
+#&gt; 20PCs                  6                  6                  4
+#&gt; 28PCs                  6                  6                  5</code></pre>
+<details>
+<p><summary><strong>Session Info</strong></summary></p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="kw">sessionInfo</span>()</span>
+<span id="cb17-2"><a href="#cb17-2"></a><span class="co">#&gt; R version 4.0.2 (2020-06-22)</span></span>
+<span id="cb17-3"><a href="#cb17-3"></a><span class="co">#&gt; Platform: x86_64-w64-mingw32/x64 (64-bit)</span></span>
+<span id="cb17-4"><a href="#cb17-4"></a><span class="co">#&gt; Running under: Windows 10 x64 (build 22000)</span></span>
+<span id="cb17-5"><a href="#cb17-5"></a><span class="co">#&gt; </span></span>
+<span id="cb17-6"><a href="#cb17-6"></a><span class="co">#&gt; Matrix products: default</span></span>
+<span id="cb17-7"><a href="#cb17-7"></a><span class="co">#&gt; </span></span>
+<span id="cb17-8"><a href="#cb17-8"></a><span class="co">#&gt; locale:</span></span>
+<span id="cb17-9"><a href="#cb17-9"></a><span class="co">#&gt; [1] LC_COLLATE=Chinese (Simplified)_China.936 </span></span>
+<span id="cb17-10"><a href="#cb17-10"></a><span class="co">#&gt; [2] LC_CTYPE=Chinese (Simplified)_China.936   </span></span>
+<span id="cb17-11"><a href="#cb17-11"></a><span class="co">#&gt; [3] LC_MONETARY=Chinese (Simplified)_China.936</span></span>
+<span id="cb17-12"><a href="#cb17-12"></a><span class="co">#&gt; [4] LC_NUMERIC=C                              </span></span>
+<span id="cb17-13"><a href="#cb17-13"></a><span class="co">#&gt; [5] LC_TIME=Chinese (Simplified)_China.936    </span></span>
+<span id="cb17-14"><a href="#cb17-14"></a><span class="co">#&gt; </span></span>
+<span id="cb17-15"><a href="#cb17-15"></a><span class="co">#&gt; attached base packages:</span></span>
+<span id="cb17-16"><a href="#cb17-16"></a><span class="co">#&gt; [1] stats     graphics  grDevices utils     datasets  methods   base     </span></span>
+<span id="cb17-17"><a href="#cb17-17"></a><span class="co">#&gt; </span></span>
+<span id="cb17-18"><a href="#cb17-18"></a><span class="co">#&gt; other attached packages:</span></span>
+<span id="cb17-19"><a href="#cb17-19"></a><span class="co">#&gt; [1] FindPC_0.0.0.9000 devtools_2.4.2    usethis_2.0.1    </span></span>
+<span id="cb17-20"><a href="#cb17-20"></a><span class="co">#&gt; </span></span>
+<span id="cb17-21"><a href="#cb17-21"></a><span class="co">#&gt; loaded via a namespace (and not attached):</span></span>
+<span id="cb17-22"><a href="#cb17-22"></a><span class="co">#&gt;  [1] tidyselect_1.1.1  xfun_0.26         bslib_0.3.0       remotes_2.4.0    </span></span>
+<span id="cb17-23"><a href="#cb17-23"></a><span class="co">#&gt;  [5] reshape2_1.4.4    purrr_0.3.4       colorspace_2.0-2  vctrs_0.3.8      </span></span>
+<span id="cb17-24"><a href="#cb17-24"></a><span class="co">#&gt;  [9] generics_0.1.0    testthat_3.0.4    htmltools_0.5.2   yaml_2.2.1       </span></span>
+<span id="cb17-25"><a href="#cb17-25"></a><span class="co">#&gt; [13] utf8_1.2.2        rlang_0.4.11      pkgbuild_1.2.0    jquerylib_0.1.4  </span></span>
+<span id="cb17-26"><a href="#cb17-26"></a><span class="co">#&gt; [17] pillar_1.6.4      DBI_1.1.1         glue_1.4.2        withr_2.4.3      </span></span>
+<span id="cb17-27"><a href="#cb17-27"></a><span class="co">#&gt; [21] sessioninfo_1.1.1 plyr_1.8.6        lifecycle_1.0.1   stringr_1.4.0    </span></span>
+<span id="cb17-28"><a href="#cb17-28"></a><span class="co">#&gt; [25] munsell_0.5.0     gtable_0.3.0      memoise_2.0.0     evaluate_0.14    </span></span>
+<span id="cb17-29"><a href="#cb17-29"></a><span class="co">#&gt; [29] labeling_0.4.2    knitr_1.34        callr_3.7.0       fastmap_1.1.0    </span></span>
+<span id="cb17-30"><a href="#cb17-30"></a><span class="co">#&gt; [33] ps_1.6.0          curl_4.3.2        fansi_1.0.2       highr_0.9        </span></span>
+<span id="cb17-31"><a href="#cb17-31"></a><span class="co">#&gt; [37] Rcpp_1.0.8        scales_1.1.1      cachem_1.0.6      desc_1.3.0       </span></span>
+<span id="cb17-32"><a href="#cb17-32"></a><span class="co">#&gt; [41] pkgload_1.2.2     jsonlite_1.7.2    farver_2.1.0      fs_1.5.0         </span></span>
+<span id="cb17-33"><a href="#cb17-33"></a><span class="co">#&gt; [45] gridExtra_2.3     ggplot2_3.3.5     digest_0.6.28     stringi_1.7.4    </span></span>
+<span id="cb17-34"><a href="#cb17-34"></a><span class="co">#&gt; [49] processx_3.5.2    dplyr_1.0.7       rprojroot_2.0.2   grid_4.0.2       </span></span>
+<span id="cb17-35"><a href="#cb17-35"></a><span class="co">#&gt; [53] cli_3.0.1         tools_4.0.2       magrittr_2.0.1    sass_0.4.0       </span></span>
+<span id="cb17-36"><a href="#cb17-36"></a><span class="co">#&gt; [57] tibble_3.1.6      crayon_1.4.2      pkgconfig_2.0.3   ellipsis_0.3.2   </span></span>
+<span id="cb17-37"><a href="#cb17-37"></a><span class="co">#&gt; [61] prettyunits_1.1.1 assertthat_0.2.1  rmarkdown_2.11    rstudioapi_0.13  </span></span>
+<span id="cb17-38"><a href="#cb17-38"></a><span class="co">#&gt; [65] R6_2.5.1          compiler_4.0.2</span></span></code></pre></div>
+</details>
+</div>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
