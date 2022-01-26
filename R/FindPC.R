@@ -209,6 +209,6 @@ fig<-function(sdev,result){
     theme(legend.title = element_blank())+
     theme(legend.margin = margin(0,0,0,0,'cm'))
 
-  g<-(g1+g2)+plot_layout(widths = c(3,1))
+  g<-(g1+g2)+plot_layout(widths = c(6,1))
   grid.draw(g)
 }
