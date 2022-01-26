@@ -14,7 +14,7 @@
 #'
 #' @return A numeric value (matrix) including the number of PCs.
 #' @export
-#' @import ggplot2 grid gridExtra reshape2
+#' @import ggplot2 reshape2 patchwork fANCOVA
 #' @author Haotian Zhuang, Zhicheng Ji <haotian.zhuang@@duke.edu>
 #' @examples
 #' # Return the default result (Perpendicular line with 30 PCs)
@@ -123,10 +123,13 @@ fun<-function(sdev){
   names(dim_plm)<-'Piecewise linear model'
 
   # first derivative
-  df1<-diff(sdev,differences=1)
-  den<-density(df1)
+  fit<-suppressWarnings(loess.as(x,sdev))
+  yb<-predict(fit,data.frame(x=1:length(sdev)-1e-8))
+  yf<-predict(fit,data.frame(x=1:length(sdev)+1e-8))
+  df1<-(yf-yb)/2e-8
+  den<-density(df1,na.rm = T)
   rlev<-rle(diff(den$y)>0)$lengths
-  if(length(rlev)<=2) {dim_fid<-max(which(df1<mean(df1)))+1
+  if(length(rlev)<=2) {dim_fid<-max(which(df1<mean(df1,na.rm = T)))+1
   } else {
     cutoff<-sum(rlev[-((length(rlev)-1):length(rlev))])
     dim_fid<-max(which(df1<den$x[cutoff]))+1 }
@@ -206,6 +209,6 @@ fig<-function(sdev,result){
     theme(legend.title = element_blank())+
     theme(legend.margin = margin(0,0,0,0,'cm'))
 
-  g<-grid.arrange(g1,g2,nrow=1)
-  grid.draw(g)
+  g<-(g1+g2)+plot_layout(widths = c(3,1))
+  return(g)
 }
