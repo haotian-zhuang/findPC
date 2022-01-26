@@ -3,5 +3,6 @@
 export(FindPC)
 import(fANCOVA)
 import(ggplot2)
+import(grid)
 import(patchwork)
 import(reshape2)

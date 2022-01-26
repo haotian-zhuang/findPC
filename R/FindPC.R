@@ -14,7 +14,7 @@
 #'
 #' @return A numeric value (matrix) including the number of PCs.
 #' @export
-#' @import ggplot2 reshape2 patchwork fANCOVA
+#' @import ggplot2 reshape2 patchwork grid fANCOVA
 #' @author Haotian Zhuang, Zhicheng Ji <haotian.zhuang@@duke.edu>
 #' @examples
 #' # Return the default result (Perpendicular line with 30 PCs)
@@ -210,5 +210,5 @@ fig<-function(sdev,result){
     theme(legend.margin = margin(0,0,0,0,'cm'))
 
   g<-(g1+g2)+plot_layout(widths = c(3,1))
-  return(g)
+  grid.draw(g)
 }

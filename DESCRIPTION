@@ -13,6 +13,7 @@ RoxygenNote: 7.1.2
 Imports: 
     fANCOVA,
     ggplot2,
+    grid,
     patchwork,
     reshape2
 Suggests: 
