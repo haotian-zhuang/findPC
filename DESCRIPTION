@@ -1,6 +1,6 @@
 Package: FindPC
 Title: FindPC: Find Number of Principal Components in Single-Cell Analysis
-Version: 0.0.0.9000
+Version: 1.0
 Authors@R: c(
     person("Haotian", "Zhuang", email = "haotian.zhuang@duke.edu", role = c("aut", "cre")),
     person("Zhicheng", "Ji", email = "zhicheng.ji@duke.edu", role = "aut"))
@@ -13,8 +13,6 @@ RoxygenNote: 7.1.2
 Imports: 
     fANCOVA,
     ggplot2,
-    grid,
-    gridExtra,
     patchwork,
     reshape2
 Suggests: 
