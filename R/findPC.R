@@ -17,7 +17,7 @@
 #' @import ggplot2 reshape2 patchwork grid
 #' @author Haotian Zhuang, Zhicheng Ji <haotian.zhuang@@duke.edu>
 #' @examples
-#' # Return the default result (Perpendicular line with 30 PCs)
+#' Return the default result (Perpendicular line with 30 PCs)
 #' findPC(sdev = sdev)
 #'
 #' Return the results based on Piecewise linear model with 16,20 and 28 PCs

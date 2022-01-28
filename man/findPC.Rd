@@ -35,7 +35,7 @@ It also supports the aggregation of results from multiple methods and total numb
 For users who want to visually inspect the results, findPC can also display the elbow plot with the automatically identified elbow points.
 }
 \examples{
-# Return the default result (Perpendicular line with 30 PCs)
+Return the default result (Perpendicular line with 30 PCs)
 findPC(sdev = sdev)
 
 Return the results based on Piecewise linear model with 16,20 and 28 PCs
