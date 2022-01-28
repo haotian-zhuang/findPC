@@ -11,7 +11,7 @@ devtools::install_github("haotian-zhuang/findPC")
 ```
 ## User Manual
 Check the following page for the user manual:
-https://github.com/haotian-zhuang/findPC/blob/main/vignettes/UserManual.html
+http://htmlpreview.github.io/?https://github.com/haotian-zhuang/findPC/blob/main/vignettes/UserManual.html
 
 ## Citation
 Please cite the following paper: Zhuang, H., & Ji, Z. (2021). findPC: An R package to automatically select number of principal components in single-cell analysis. bioRxiv.
