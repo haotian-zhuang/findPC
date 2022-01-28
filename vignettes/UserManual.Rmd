@@ -1,11 +1,16 @@
 ---
-title: "FindPC - User Manual"
+title: "findPC - User Manual"
 author: "Haotian Zhuang"
-output: rmarkdown::html_vignette
-vignette: >
-  %\VignetteIndexEntry{UserManual}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
+#output: rmarkdown::html_vignette
+#vignette: >
+#  %\VignetteIndexEntry{UserManual}
+#  %\VignetteEngine{knitr::rmarkdown}
+#  %\VignetteEncoding{UTF-8}
+output:
+  html_document:
+#    theme: united
+#    df_print: kable
+date: 'Compiled: `r format(Sys.Date(), "%m/%d/%Y")`'
 ---
 
 ```{r, include = FALSE}
@@ -16,20 +21,20 @@ knitr::opts_chunk$set(
 ```
 
 # Introduction
-FindPC is a software tool including six methods to automatically select the number of principal components to retain based on the standard deviations explained by each PC. A major advantage of FindPC is that the only information required is a numeric vector of standard deviations explained by each PC.
+findPC is a software tool including six methods to automatically select the number of principal components to retain based on the standard deviations explained by each PC. A major advantage of findPC is that the only information required is a numeric vector of standard deviations explained by each PC.
 
 # Installation
-FindPC software can be installed via Github. Users should have R installed on their computer before installing FindPC. R can be downloaded here: http://www.r-project.org/. To install the latest version of FindPC package via Github, run following commands in R:
+findPC software can be installed via Github. Users should have R installed on their computer before installing findPC. R can be downloaded here: http://www.r-project.org/. To install the latest version of findPC package via Github, run following commands in R:
 ```{r message=FALSE,warning=FALSE}
 if (!require("devtools"))
 install.packages("devtools")
-devtools::install_github("haotian-zhuang/FindPC")
-library(FindPC)
+devtools::install_github("haotian-zhuang/findPC")
+library(findPC)
 ```
 
-# FindPC function
-The synopsis of FindPC is:  
-`FindPC(sdev,number = 30,method = 'perpendicular line',aggregate = NULL,figure = FALSE)`
+# findPC function
+The synopsis of findPC is:  
+`findPC(sdev,number = 30,method = 'perpendicular line',aggregate = NULL,figure = FALSE)`
 
 The default is to return the number of PCs by Perpendicular line with 30 PCs. The following codes take the 50 PCs of human fetal brain tissue as an example.
 ```{r}
@@ -43,76 +48,76 @@ sdev<-c(6.909905,5.891180,5.110216,3.996021,3.541697,
         1.603669,1.598074,1.593364,1.586666,1.584247,
         1.580981,1.574226,1.568660,1.567932,1.562935,
         1.557284,1.554781,1.551753,1.547596,1.543069)
-FindPC(sdev = sdev)
+findPC(sdev = sdev)
 ```
 
 The argument 'sdev' should be sorted in decreasing order.
 ```{r, error=TRUE}
-FindPC(sdev = -sdev)
+findPC(sdev = -sdev)
 ```
 
 ## Number
 The argument 'number' is a vector including number of PCs used in the following function.
 ```{r, error=TRUE}
-FindPC(sdev = sdev,number = 51)
+findPC(sdev = sdev,number = 51)
 ```
 
 ```{r}
-FindPC(sdev = sdev,number = c(16,20,28))
+findPC(sdev = sdev,number = c(16,20,28))
 ```
 
 ## Method
 The argument ‘method’ specifies the six methods or returns the six results simultaneously.
 ```{r, error=TRUE}
-FindPC(sdev = sdev,method = 'xxx')
+findPC(sdev = sdev,method = 'xxx')
 ```
 
 ```{r}
-FindPC(sdev = sdev,number = c(16,20,28),method = 'all')
+findPC(sdev = sdev,number = c(16,20,28),method = 'all')
 ```
 
 **Method 1: Piecewise linear model**
 ```{r}
-FindPC(sdev = sdev,number = c(16,20,28),method = 'piecewise linear model')
+findPC(sdev = sdev,number = c(16,20,28),method = 'piecewise linear model')
 ```
 
 **Method 2: First derivative**
 ```{r}
-FindPC(sdev = sdev,number = c(16,20,28),method = 'first derivative')
+findPC(sdev = sdev,number = c(16,20,28),method = 'first derivative')
 ```
 
 **Method 3: Second derivative**
 ```{r}
-FindPC(sdev = sdev,number = c(16,20,28),method = 'second derivative')
+findPC(sdev = sdev,number = c(16,20,28),method = 'second derivative')
 ```
 
 **Method 4: Preceding residual**
 ```{r}
-FindPC(sdev = sdev,number = c(16,20,28),method = 'preceding residual')
+findPC(sdev = sdev,number = c(16,20,28),method = 'preceding residual')
 ```
 
 **Method 5: Perpendicular line**
 ```{r}
-FindPC(sdev = sdev,number = c(16,20,28),method = 'perpendicular line')
+findPC(sdev = sdev,number = c(16,20,28),method = 'perpendicular line')
 ```
 
 **Method 6: K-means clustering**
 ```{r}
-FindPC(sdev = sdev,number = c(16,20,28),method = 'k-means clustering')
+findPC(sdev = sdev,number = c(16,20,28),method = 'k-means clustering')
 ```
 
 ## Aggregate
 If users are also interested in the mean, median, or voting (median if all are different, otherwise mode) of the results, the argument ‘aggregate’ will support them.
 ```{r}
-FindPC(sdev = sdev,number = c(16,20,28),method = 'all',aggregate = 'mean')
-FindPC(sdev = sdev,number = c(16,20,28),method = 'all',aggregate = 'median')
-FindPC(sdev = sdev,number = c(16,20,28),method = 'all',aggregate = 'voting')
+findPC(sdev = sdev,number = c(16,20,28),method = 'all',aggregate = 'mean')
+findPC(sdev = sdev,number = c(16,20,28),method = 'all',aggregate = 'median')
+findPC(sdev = sdev,number = c(16,20,28),method = 'all',aggregate = 'voting')
 ```
 
 ## Figure
 The last argument ‘figure’ provides the option to draw a heatmap showing the results.
-```{r, fig.width=10, fig.height=3}
-FindPC(sdev = sdev,number = c(16,20,28),method = 'all',figure = T)
+```{r, fig.width=8, fig.height=3}
+findPC(sdev = sdev,number = c(16,20,28),method = 'all',figure = T)
 ```
 
 <details>
