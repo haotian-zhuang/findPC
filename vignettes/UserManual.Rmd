@@ -56,7 +56,7 @@ findPC(sdev = sdev,number = 51)
 ```
 
 ```{r}
-findPC(sdev = sdev,number = c(16,20,28))
+findPC(sdev = sdev,number = c(24,36,48))
 ```
 
 ## Method
@@ -66,51 +66,51 @@ findPC(sdev = sdev,method = 'xxx')
 ```
 
 ```{r}
-findPC(sdev = sdev,number = c(16,20,28),method = 'all')
+findPC(sdev = sdev,number = c(24,36,48),method = 'all')
 ```
 
 **Method 1: Piecewise linear model**
 ```{r}
-findPC(sdev = sdev,number = c(16,20,28),method = 'piecewise linear model')
+findPC(sdev = sdev,number = c(24,36,48),method = 'piecewise linear model')
 ```
 
 **Method 2: First derivative**
 ```{r}
-findPC(sdev = sdev,number = c(16,20,28),method = 'first derivative')
+findPC(sdev = sdev,number = c(24,36,48),method = 'first derivative')
 ```
 
 **Method 3: Second derivative**
 ```{r}
-findPC(sdev = sdev,number = c(16,20,28),method = 'second derivative')
+findPC(sdev = sdev,number = c(24,36,48),method = 'second derivative')
 ```
 
 **Method 4: Preceding residual**
 ```{r}
-findPC(sdev = sdev,number = c(16,20,28),method = 'preceding residual')
+findPC(sdev = sdev,number = c(24,36,48),method = 'preceding residual')
 ```
 
 **Method 5: Perpendicular line**
 ```{r}
-findPC(sdev = sdev,number = c(16,20,28),method = 'perpendicular line')
+findPC(sdev = sdev,number = c(24,36,48),method = 'perpendicular line')
 ```
 
 **Method 6: K-means clustering**
 ```{r}
-findPC(sdev = sdev,number = c(16,20,28),method = 'k-means clustering')
+findPC(sdev = sdev,number = c(24,36,48),method = 'k-means clustering')
 ```
 
 ## Aggregate
 If users are also interested in the mean, median, or voting (median if all are different, otherwise mode) of the results, the argument ‘aggregate’ will support them.
 ```{r}
-findPC(sdev = sdev,number = c(16,20,28),method = 'all',aggregate = 'mean')
-findPC(sdev = sdev,number = c(16,20,28),method = 'all',aggregate = 'median')
-findPC(sdev = sdev,number = c(16,20,28),method = 'all',aggregate = 'voting')
+findPC(sdev = sdev,number = c(24,36,48),method = 'all',aggregate = 'mean')
+findPC(sdev = sdev,number = c(24,36,48),method = 'all',aggregate = 'median')
+findPC(sdev = sdev,number = c(24,36,48),method = 'all',aggregate = 'voting')
 ```
 
 ## Figure
 The last argument ‘figure’ provides the option to draw a heatmap showing the results.
 ```{r, fig.width=8, fig.height=3}
-findPC(sdev = sdev,number = c(16,20,28),method = 'all',figure = T)
+findPC(sdev = sdev,number = c(24,36,48),method = 'all',figure = T)
 ```
 
 <details>
