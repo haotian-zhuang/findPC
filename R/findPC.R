@@ -20,17 +20,17 @@
 #' Return the default result (Perpendicular line with 30 PCs)
 #' findPC(sdev = sdev)
 #'
-#' Return the results based on Piecewise linear model with 16,20 and 28 PCs
-#' findPC(sdev = sdev,number = c(16,20,28),method = 'piecewise linear model')
+#' Return the results based on Piecewise linear model with 24,36 and 48 PCs
+#' findPC(sdev = sdev,number = c(24,36,48),method = 'piecewise linear model')
 #'
-#' Return the results based on six methods with 16,20 and 28 PCs
-#' findPC(sdev = sdev,number = c(16,20,28),method = 'all')
+#' Return the results based on six methods with 24,36 and 48 PCs
+#' findPC(sdev = sdev,number = c(24,36,48),method = 'all')
 #'
-#' Return voting (median if all are different, otherwise mode) of the results from six methods with 16,20 and 28 PCs
-#' findPC(sdev = sdev,number = c(16,20,28),method = 'all',aggregate = 'voting')
+#' Return voting (median if all are different, otherwise mode) of the results from six methods with 24,36 and 48 PCs
+#' findPC(sdev = sdev,number = c(24,36,48),method = 'all',aggregate = 'voting')
 #'
-#' Return a heatmap based on six methods with 16,20 and 28 PCs
-#' findPC(sdev = sdev,number = c(16,20,28),method = 'all',figure = T)
+#' Return a heatmap based on six methods with 24,36 and 48 PCs
+#' findPC(sdev = sdev,number = c(24,36,48),method = 'all',figure = T)
 
 findPC<-function(sdev,number=30,method='perpendicular line',aggregate=NULL,figure=FALSE){
 
