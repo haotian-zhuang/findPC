@@ -368,7 +368,7 @@ library(findPC)</code></pre>
 <h1>findPC function</h1>
 <p>The synopsis of findPC is:<br />
 <code>findPC(sdev,number = 30,method = &#39;perpendicular line&#39;,aggregate = NULL,figure = FALSE)</code></p>
-<p>The default is to return the number of PCs by Perpendicular line with 30 PCs. The following codes take the 50 PCs of the sinlge-cell RNA-seq data in TSCAN package after preprocessing as an example.</p>
+<p>The default is to return the number of PCs by Perpendicular line with 30 PCs. The following codes take the 50 PCs of the single-cell RNA-seq data in TSCAN package after preprocessing as an example.</p>
 <pre class="r"><code>data(procdata)
 sdev&lt;-prcomp(t(procdata),scale. = T)$sdev[1:50]
 head(sdev)
