@@ -1,4 +1,4 @@
-#' Sinlge-cell RNA-seq data in TSCAN package after preprocessing
+#' Single-cell RNA-seq data in TSCAN package after preprocessing
 #'
 #' The dataset contains 534 rows and 131 columns. Each row represent a gene and each column represent a single cell.
 #'

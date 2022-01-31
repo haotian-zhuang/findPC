@@ -3,7 +3,7 @@
 \docType{data}
 \name{procdata}
 \alias{procdata}
-\title{Sinlge-cell RNA-seq data in TSCAN package after preprocessing}
+\title{Single-cell RNA-seq data in TSCAN package after preprocessing}
 \format{
 A matrix with 534 rows and 131 variables
 }
