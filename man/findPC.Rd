@@ -15,7 +15,7 @@ findPC(
 \arguments{
 \item{sdev}{A vector of the standard deviations explained by each principal component}
 
-\item{number}{A vector including number of PCs used in the function}
+\item{number}{A vector including number of PCs used in the function (default is 30)}
 
 \item{method}{Methods include 'all', 'piecewise linear model', 'first derivative', 'second derivative', 'preceding residual', 'perpendicular line (default)', 'k-means clustering'}
 

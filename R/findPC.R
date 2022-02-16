@@ -7,7 +7,7 @@
 #' For users who want to visually inspect the results, findPC can also display the elbow plot with the automatically identified elbow points.
 #'
 #' @param sdev A vector of the standard deviations explained by each principal component
-#' @param number A vector including number of PCs used in the function
+#' @param number A vector including number of PCs used in the function (default is 30)
 #' @param method Methods include 'all', 'piecewise linear model', 'first derivative', 'second derivative', 'preceding residual', 'perpendicular line (default)', 'k-means clustering'
 #' @param aggregate An option to report the mean, median, or voting (median if all are different, otherwise mode) of the results
 #' @param figure Whether to draw a heatmap showing the results
