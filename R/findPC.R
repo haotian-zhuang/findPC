@@ -199,12 +199,9 @@ fig<-function(sdev,result){
     xlab(NULL)+ylab(NULL)+theme_minimal()+
     theme(axis.text.y = element_text(face = 'bold'))+
     theme(axis.text.x = element_text(face = 'bold'))+
-    theme(legend.position = 'left')+
+    theme(legend.position = 'none')+
     theme(panel.grid = element_blank())+
-    scale_y_discrete(position = 'right')+
-    theme(legend.key.size = unit(0.2,'inches'))+
-    theme(legend.title = element_blank())+
-    theme(legend.margin = margin(0,0,0,0,'cm'))
+    scale_y_discrete(position = 'right')
 
   g<-(g1+g2)+plot_layout(widths = c(3,1))
   grid.draw(g)
