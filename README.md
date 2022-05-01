@@ -1,4 +1,4 @@
-# findPC: An R package to automatically select number of principal components in single-cell analysis
+# findPC: An R package to automatically select the number of principal components in single-cell analysis
 ## Overview
 findPC is a software tool including six methods to automatically select the number of principal components to retain based on the standard deviations explained by each PC. A major advantage of findPC is that the only information required is a numeric vector of standard deviations explained by each PC.
 
@@ -14,7 +14,7 @@ Check the following page for the user manual:
 http://htmlpreview.github.io/?https://github.com/haotian-zhuang/findPC/blob/main/vignettes/UserManual.html
 
 ## Citation
-Please cite the following paper: Zhuang, H., & Ji, Z. (2021). findPC: An R package to automatically select number of principal components in single-cell analysis. bioRxiv.
+Please cite the following paper: Zhuang et al., findPC: An R package to automatically select the number of principal components in single-cell analysis, Bioinformatics, 2022;, btac235, https://doi.org/10.1093/bioinformatics/btac235
 
 ## Contact the Author
 Author: Haotian Zhuang, Zhicheng Ji
