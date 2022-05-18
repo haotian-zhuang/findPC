@@ -14,7 +14,7 @@ Check the following page for the user manual:
 http://htmlpreview.github.io/?https://github.com/haotian-zhuang/findPC/blob/main/vignettes/UserManual.html
 
 ## Citation
-Please cite the following paper: Zhuang et al., findPC: An R package to automatically select the number of principal components in single-cell analysis, Bioinformatics, 2022;, btac235, https://doi.org/10.1093/bioinformatics/btac235
+Please cite the following paper: Zhuang et al., findPC: An R package to automatically select the number of principal components in single-cell analysis, Bioinformatics, Volume 38, Issue 10, 15 May 2022, Pages 2949–2951, https://doi.org/10.1093/bioinformatics/btac235
 
 ## Contact the Author
 Author: Haotian Zhuang, Zhicheng Ji
