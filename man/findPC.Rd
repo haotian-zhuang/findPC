@@ -27,7 +27,7 @@ findPC(
 A numeric value (matrix) including the number of PCs.
 }
 \description{
-Automatically select the number of principal components in single-cell analysis
+Automatic selection of number of principal components
 }
 \details{
 findPC returns a list of results for one or multiple methods with different total numbers of PCs.

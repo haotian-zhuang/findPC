@@ -1,6 +1,6 @@
 #' findPC
 #'
-#' Automatically select the number of principal components in single-cell analysis
+#' Automatic selection of number of principal components
 #'
 #' findPC returns a list of results for one or multiple methods with different total numbers of PCs.
 #' It also supports the aggregation of results from multiple methods and total numbers of PCs by taking the average, median, or mode.
